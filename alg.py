@@ -24,7 +24,8 @@ def initTop():
 
 
 def getExtraR(jump):
-    return jump
+    cfg = Config()
+    return jump * cfg.extraKey
 
 def getBestPath(nodeList, start, end):  
     cfg = Config()
@@ -34,28 +35,31 @@ def getBestPath(nodeList, start, end):
     pQueue = []
 
     for edgeIdx in startNode.getAdjNodesIdx():
-        heapq.heappush(pQueue, startNode.edges[edgeIdx])
+        newEdge = startNode.edges[edgeIdx]
+        newEdge.weight = newEdge.length() * cfg.keyPerLen  # calculate weight by jump times
+        heapq.heappush(pQueue, newEdge)
     
     startNode.addToPath(startNode)
 
     while pQueue:
-        print(pQueue)
+        # print(pQueue)
         tpEdge = heapq.heappop(pQueue)
-        print(pQueue)
+        # print(pQueue)
         outIdx = tpEdge.start
         inIdx = tpEdge.end
 
-        print('outIdx=' + str(outIdx) + ' inIdx=' + str(inIdx))
+        # print('outIdx=' + str(outIdx) + ' inIdx=' + str(inIdx))
         outNode = nodeList[outIdx]
         inNode = nodeList[inIdx]
         # add jump
+        inNode.res = outNode.res + tpEdge.weight
         inNode.jumps = outNode.jumps + 1
         curJump = inNode.jumps
         # upload path
         inNode.addToPath(outNode)
 
         if inNode == endNode:
-            return inNode.path
+            return inNode.path, inNode.res
 
         if maxJump < inNode.jumps:
             continue
@@ -63,7 +67,7 @@ def getBestPath(nodeList, start, end):
         for edgeIdx in inNode.getAdjNodesIdx():
             # add to heap
             newEdge = inNode.edges[edgeIdx]
-            newEdge.weight = newEdge.length() + getExtraR(curJump)  # calculate weight by jump times
+            newEdge.weight = newEdge.length() * cfg.keyPerLen + getExtraR(curJump)  # calculate weight by jump times
             heapq.heappush(pQueue, newEdge)
 
     return None
@@ -76,6 +80,7 @@ def printTop(nodeList):
             edges = node.getAdjEdge()[idx]
             print('node:%d length:%d' % ((idx + 1), edges.length()), end=',')
         print()
+
 
 def main():
     print('----------输入网络----------')
@@ -91,9 +96,10 @@ def main():
         if start == -1:
             break
         end = int(input('终点编号:'))
-        bestPath = getBestPath(nodeList, start - 1, end - 1)
+        bestPath, resource = getBestPath(nodeList, start - 1, end - 1)
         if bestPath:
             print(bestPath)
+            print(resource)
         else:
             print('无路径')
     

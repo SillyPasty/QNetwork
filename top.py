@@ -57,4 +57,9 @@ class Edge():
     def __lt__(self, other):
         return self.weight < other.weight
 
-    
+
+class Task():
+    def __init__(self, startIdx, endIdx, res):
+        self.startIdx = startIdx
+        self.endIdx = endIdx
+        self.res = res
