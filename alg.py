@@ -23,9 +23,9 @@ def initTop():
     return nodeList
 
 
-def getExtraR(jump):
+def getExtraR(jump, length):
     cfg = Config()
-    return jump * cfg.extraKey
+    return (jump * cfg.extraKey + length * cfg.keyPerLen)
 
 def getBestPath(nodeList, start, end):  
     cfg = Config()
@@ -53,6 +53,7 @@ def getBestPath(nodeList, start, end):
         inNode = nodeList[inIdx]
         # add jump
         inNode.res = outNode.res + tpEdge.weight
+        
         inNode.jumps = outNode.jumps + 1
         curJump = inNode.jumps
         # upload path
@@ -67,7 +68,7 @@ def getBestPath(nodeList, start, end):
         for edgeIdx in inNode.getAdjNodesIdx():
             # add to heap
             newEdge = inNode.edges[edgeIdx]
-            newEdge.weight = newEdge.length() * cfg.keyPerLen + getExtraR(curJump)  # calculate weight by jump times
+            newEdge.weight = getExtraR(curJump, newEdge.length())  # calculate weight by jump times
             heapq.heappush(pQueue, newEdge)
 
     return None
