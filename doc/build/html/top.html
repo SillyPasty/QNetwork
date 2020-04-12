@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>top module &#8212; Key Distribution 1.0 文档</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Key Distribution 1.0 文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-top">
+<span id="top-module"></span><h1>top module<a class="headerlink" href="#module-top" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="top.Edge">
+<em class="property">class </em><code class="sig-prename descclassname">top.</code><code class="sig-name descname">Edge</code><span class="sig-paren">(</span><em class="sig-param">start</em>, <em class="sig-param">end</em>, <em class="sig-param">length</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="top.Edge.addKeys">
+<code class="sig-name descname">addKeys</code><span class="sig-paren">(</span><em class="sig-param">keys</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.addKeys" title="永久链接至目标">¶</a></dt>
+<dd><p>添加密钥</p>
+<p>向本边分配密钥</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>keys</strong> (<em>int</em>) – 新增密钥量</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>当前剩余密钥量</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Edge.getKeys">
+<code class="sig-name descname">getKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.getKeys" title="永久链接至目标">¶</a></dt>
+<dd><p>获得当前密钥量</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>返回当前密钥量</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Edge.length">
+<code class="sig-name descname">length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.length" title="永久链接至目标">¶</a></dt>
+<dd><p>获得边长度</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>返回边长度</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Edge.updateReling">
+<code class="sig-name descname">updateReling</code><span class="sig-paren">(</span><em class="sig-param">resW</em>, <em class="sig-param">keyW</em>, <em class="sig-param">prevNode</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.updateReling" title="永久链接至目标">¶</a></dt>
+<dd><p>更新可靠率</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resW</strong> (<em>double</em>) – 消耗资源权重</p></li>
+<li><p><strong>keyW</strong> (<em>double</em>) – 当前密钥量权重</p></li>
+<li><p><strong>prevNode</strong> (<em>class Node</em>) – 初始节点</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Edge.updateRes">
+<code class="sig-name descname">updateRes</code><span class="sig-paren">(</span><em class="sig-param">res</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.updateRes" title="永久链接至目标">¶</a></dt>
+<dd><p>更新边消耗资源</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>res</strong> (<em>double</em>) – 边消耗资源</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Edge.useKeys">
+<code class="sig-name descname">useKeys</code><span class="sig-paren">(</span><em class="sig-param">keys</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Edge.useKeys" title="永久链接至目标">¶</a></dt>
+<dd><p>使用密钥</p>
+<p>判断当前剩余密钥量是否足够，并消耗密钥</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>keys</strong> (<em>int</em>) – 消耗密钥量</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>当前剩余密钥量 若当前密钥量不足，返回-1</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="top.Node">
+<em class="property">class </em><code class="sig-prename descclassname">top.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param">nodeId</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Node" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>节点类</p>
+<dl class="method">
+<dt id="top.Node.addToPath">
+<code class="sig-name descname">addToPath</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.addToPath" title="永久链接至目标">¶</a></dt>
+<dd><p>将本节点加入路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>class Node</em>) – 上一个节点</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Node.con">
+<code class="sig-name descname">con</code><span class="sig-paren">(</span><em class="sig-param">node</em>, <em class="sig-param">length</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.con" title="永久链接至目标">¶</a></dt>
+<dd><p>连接两节点</p>
+<p>本节点为初始点</p>
+<dl class="simple">
+<dt>Args：</dt><dd><p>node (class Node): 终点节点
+length (double): 节点长度</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Node.getAdjEdge">
+<code class="sig-name descname">getAdjEdge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.getAdjEdge" title="永久链接至目标">¶</a></dt>
+<dd><p>得到本节点出边编号</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>本节点出边字典，按照邻接节点id访问</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Node.getAdjNodesIdx">
+<code class="sig-name descname">getAdjNodesIdx</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.getAdjNodesIdx" title="永久链接至目标">¶</a></dt>
+<dd><p>得到本节点邻接节点编号</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p>本节点邻接节点列表</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Node.updateJump">
+<code class="sig-name descname">updateJump</code><span class="sig-paren">(</span><em class="sig-param">prevNode</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.updateJump" title="永久链接至目标">¶</a></dt>
+<dd><p>更新跳数
+更新当前节点跳数，并返回跳数</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>prevNode</strong> (<em>class Node</em>) – 前一节点</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>当前节点跳数</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="top.Node.updateRes">
+<code class="sig-name descname">updateRes</code><span class="sig-paren">(</span><em class="sig-param">prevNode</em>, <em class="sig-param">edge</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Node.updateRes" title="永久链接至目标">¶</a></dt>
+<dd><p>更新本节点资源和可靠率</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prevNode</strong> (<em>class Node</em>) – 初始节点</p></li>
+<li><p><strong>res</strong> (<em>double</em>) – 新增消耗资源</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="top.Task">
+<em class="property">class </em><code class="sig-prename descclassname">top.</code><code class="sig-name descname">Task</code><span class="sig-paren">(</span><em class="sig-param">startIdx</em>, <em class="sig-param">endIdx</em>, <em class="sig-param">res</em><span class="sig-paren">)</span><a class="headerlink" href="#top.Task" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/top.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Key Distribution 1.0 文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; 版权所有 2020, Yubo.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0 创建。
+    </div>
+  </body>
+</html>

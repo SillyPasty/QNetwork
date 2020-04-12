@@ -1,0 +1,7 @@
+cfgs module
+===========
+
+.. automodule:: cfgs
+   :members:
+   :undoc-members:
+   :show-inheritance:

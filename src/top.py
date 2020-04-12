@@ -90,7 +90,7 @@ class Node():
 class Edge():
 
     def __init__(self, start, end, length):
-        """ 初始化一条边
+        """初始化一条边
 
         Args:
             start (int): 初始点编号
@@ -108,7 +108,7 @@ class Edge():
         self.reling = 0
     
     def addKeys(self, keys):
-        """ 添加密钥
+        """添加密钥
 
         向本边分配密钥
 
@@ -123,7 +123,7 @@ class Edge():
         return self.__keys
 
     def useKeys(self, keys):
-        """ 使用密钥
+        """使用密钥
 
         判断当前剩余密钥量是否足够，并消耗密钥
 
@@ -140,7 +140,7 @@ class Edge():
         return self.__keys
 
     def getKeys(self):
-        """ 获得当前密钥量
+        """获得当前密钥量
 
         Returns:
             int: 返回当前密钥量

@@ -1,0 +1,7 @@
+alg module
+==========
+
+.. automodule:: alg
+   :members:
+   :undoc-members:
+   :show-inheritance:

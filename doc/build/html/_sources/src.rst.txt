@@ -1,0 +1,62 @@
+src package
+===========
+
+Submodules
+----------
+
+src.alg module
+--------------
+
+.. automodule:: src.alg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.cfgs module
+---------------
+
+.. automodule:: src.cfgs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.dataInit module
+-------------------
+
+.. automodule:: src.dataInit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.key module
+--------------
+
+.. automodule:: src.key
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.simulate module
+-------------------
+
+.. automodule:: src.simulate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.top module
+--------------
+
+.. automodule:: src.top
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: src
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+dataInit module
+===============
+
+.. automodule:: dataInit
+   :members:
+   :undoc-members:
+   :show-inheritance:

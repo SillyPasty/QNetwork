@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>alg module &#8212; Key Distribution 1.0 文档</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Key Distribution 1.0 文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-alg">
+<span id="alg-module"></span><h1>alg module<a class="headerlink" href="#module-alg" title="永久链接至标题">¶</a></h1>
+<dl class="function">
+<dt id="alg.getBestPath">
+<code class="sig-prename descclassname">alg.</code><code class="sig-name descname">getBestPath</code><span class="sig-paren">(</span><em class="sig-param">nodeList</em>, <em class="sig-param">start</em>, <em class="sig-param">end</em><span class="sig-paren">)</span><a class="headerlink" href="#alg.getBestPath" title="永久链接至目标">¶</a></dt>
+<dd><p>计算额外资源</p>
+<p>根据跳数和长度计算额外资源</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodeList</strong> (<em>list</em>) – 节点列表</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – 起点编号</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – 终点编号</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>终点, 若不存在路径, 返回None</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>class Node</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="alg.transResourses">
+<code class="sig-prename descclassname">alg.</code><code class="sig-name descname">transResourses</code><span class="sig-paren">(</span><em class="sig-param">jump</em>, <em class="sig-param">length</em><span class="sig-paren">)</span><a class="headerlink" href="#alg.transResourses" title="永久链接至目标">¶</a></dt>
+<dd><p>计算额外资源</p>
+<p>根据跳数和长度计算额外资源</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jump</strong> (<em>int</em>) – 当前跳数</p></li>
+<li><p><strong>length</strong> (<em>double</em>) – 边长度</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p>额外资源</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/alg.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Key Distribution 1.0 文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; 版权所有 2020, Yubo.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0 创建。
+    </div>
+  </body>
+</html>
