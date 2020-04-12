@@ -4,114 +4,90 @@ from cfgs import Config
 import heapq
 
 
-def initTop():
-    nodeList = []
-    size = int(input('Input the number of the nodes:'))
 
-    for i in range(0, size):
-        node = Node(i)
-        nodeList.append(node)
+def transResourses(jump, length):
+    """ 计算额外资源
 
-    for outNode in range(0, size):
-        row = input('Input the %d row:' % (outNode + 1))
-        lens = row.split(' ')
-        for inNode, length in enumerate(lens):
-            length = int(length)
-            if length and inNode != outNode:
-                nodeList[outNode].con(nodeList[inNode], length)
+    根据跳数和长度计算额外资源
     
-    return nodeList
+    Args: 
+        jump (int): 当前跳数
+        length (double): 边长度
+    
+    Returns:
+        double: 额外资源
 
-
-def getExtraR(jump, length):
+    """
     cfg = Config()
     return (jump * cfg.extraKey + length * cfg.keyPerLen)
 
-def getBestPath(nodeList, start, end):  
+def getBestPath(nodeList, start, end):
+    """ 计算额外资源
+    
+    根据跳数和长度计算额外资源
+    
+    Args: 
+        nodeList (list): 节点列表
+        start (int): 起点编号
+        end (int): 终点编号
+    
+    Returns:
+        class Node: 终点, 若不存在路径, 返回None
+
+    """  
     cfg = Config()
     startNode = nodeList[start]
     endNode = nodeList[end]
     maxJump = cfg.MAXJUMPS
     pQueue = []
+    isVisit = []
+    for _ in range(0, len(nodeList)):
+        isVisit.append(0)
 
     for edgeIdx in startNode.getAdjNodesIdx():
-        newEdge = startNode.edges[edgeIdx]
-        newEdge.weight = newEdge.length() * cfg.keyPerLen  # calculate weight by jump times
-        heapq.heappush(pQueue, newEdge)
-    
+        isVisit[start] = 1
+        cueEdge = startNode.edges[edgeIdx]
+        res = transResourses(0, cueEdge.length())
+        cueEdge.updateRes(res)  # 更新资源
+        cueEdge.updateReling(cfg.RESW, cfg.KEYW, startNode)  # 更新可靠率
+
+        heapq.heappush(pQueue, cueEdge)
+
     startNode.addToPath(startNode)
 
     while pQueue:
+        curEdge = heapq.heappop(pQueue)
         # print(pQueue)
-        tpEdge = heapq.heappop(pQueue)
-        # print(pQueue)
-        outIdx = tpEdge.start
-        inIdx = tpEdge.end
-
+        outIdx = curEdge.start
+        inIdx = curEdge.end
         # print('outIdx=' + str(outIdx) + ' inIdx=' + str(inIdx))
         outNode = nodeList[outIdx]
         inNode = nodeList[inIdx]
+
+        isVisit[inIdx] = 1
         # add jump
-        inNode.res = outNode.res + tpEdge.weight
-        
-        inNode.jumps = outNode.jumps + 1
-        curJump = inNode.jumps
+        curJump = inNode.updateJump(outNode)
+
+        inNode.updateRes(outNode, curEdge)
+
         # upload path
         inNode.addToPath(outNode)
 
         if inNode == endNode:
-            return inNode.path, inNode.res
+            return inNode
 
-        if maxJump < inNode.jumps:
+        if maxJump < curJump:
             continue
 
         for edgeIdx in inNode.getAdjNodesIdx():
             # add to heap
             newEdge = inNode.edges[edgeIdx]
-            newEdge.weight = getExtraR(curJump, newEdge.length())  # calculate weight by jump times
+            if isVisit[newEdge.end]:
+                continue
+            res = transResourses(curJump, newEdge.length())
+            newEdge.updateRes(res)
+            newEdge.updateReling(cfg.RESW, cfg.KEYW, outNode)  # calculate weight by jump times
+
             heapq.heappush(pQueue, newEdge)
 
     return None
-
-def printTop(nodeList):
-    for node in nodeList:
-        print('Node id %d ' % (node.nodeId + 1))
-        adjNodesIdx = node.getAdjNodesIdx()
-        for idx in adjNodesIdx:
-            edges = node.getAdjEdge()[idx]
-            print('node:%d length:%d' % ((idx + 1), edges.length()), end=',')
-        print()
-
-
-def main():
-    print('----------输入网络----------')
-    nodeList = initTop()
-    printTop(nodeList)
-    for node in nodeList:
-        print(node.path)
-
-    print('----------测试算法----------')
-    while 1:
-        print('...开始测试，输入-1退出...')
-        start = int(input('起点编号:'))
-        if start == -1:
-            break
-        end = int(input('终点编号:'))
-        bestPath, resource = getBestPath(nodeList, start - 1, end - 1)
-        if bestPath:
-            print(bestPath)
-            print(resource)
-        else:
-            print('无路径')
-    
-main()
-
-
-
-'''
-
-0 100 1
-0 0 0
-0 1 0
-
-'''
