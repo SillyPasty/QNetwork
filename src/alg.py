@@ -1,11 +1,10 @@
 from top import Node, Edge
 from key import KeyPool
-from cfgs import Config
 import heapq
 
 
 
-def transResourses(jump, length):
+def transResourses(jump, length, cfg):
     """ 计算额外资源
 
     根据跳数和长度计算额外资源
@@ -18,10 +17,9 @@ def transResourses(jump, length):
         double: 额外资源
 
     """
-    cfg = Config()
     return (jump * cfg.extraKey + length * cfg.keyPerLen)
 
-def getBestPath(nodeList, start, end):
+def getBestPath(nodeList, start, end, cfg):
     """ 计算额外资源
     
     根据跳数和长度计算额外资源
@@ -35,7 +33,6 @@ def getBestPath(nodeList, start, end):
         class Node: 终点, 若不存在路径, 返回None
 
     """  
-    cfg = Config()
     startNode = nodeList[start]
     endNode = nodeList[end]
     maxJump = cfg.MAXJUMPS
@@ -47,7 +44,7 @@ def getBestPath(nodeList, start, end):
     for edgeIdx in startNode.getAdjNodesIdx():
         isVisit[start] = 1
         cueEdge = startNode.edges[edgeIdx]
-        res = transResourses(0, cueEdge.length())
+        res = transResourses(0, cueEdge.length(), cfg)
         cueEdge.updateRes(res)  # 更新资源
         cueEdge.updateReling(cfg.RESW, cfg.KEYW, startNode)  # 更新可靠率
 
@@ -84,7 +81,7 @@ def getBestPath(nodeList, start, end):
             newEdge = inNode.edges[edgeIdx]
             if isVisit[newEdge.end]:
                 continue
-            res = transResourses(curJump, newEdge.length())
+            res = transResourses(curJump, newEdge.length(), cfg)
             newEdge.updateRes(res)
             newEdge.updateReling(cfg.RESW, cfg.KEYW, outNode)  # calculate weight by jump times
 
