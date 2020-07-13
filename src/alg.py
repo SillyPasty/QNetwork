@@ -37,54 +37,70 @@ def getBestPath(nodeList, start, end, cfg):
     endNode = nodeList[end]
     maxJump = cfg.MAXJUMPS
     pQueue = []
-    isVisit = []
-    for _ in range(0, len(nodeList)):
-        isVisit.append(0)
 
-    for edgeIdx in startNode.getAdjNodesIdx():
-        isVisit[start] = 1
-        cueEdge = startNode.edges[edgeIdx]
-        res = transResourses(0, cueEdge.length(), cfg)
-        cueEdge.updateRes(res)  # 更新资源
-        cueEdge.updateReling(cfg.RESW, cfg.KEYW, startNode)  # 更新可靠率
+    isVisit = [0 for _ in range(0, len(nodeList))]
+    visit = 0
+    dist = [-1 for _ in range(0, len(nodeList))]
 
-        heapq.heappush(pQueue, cueEdge)
-
+    isVisit[start] = 1
+    visit += 1
+    dist[start] = 0
     startNode.addToPath(startNode)
+    for edgeIdx in startNode.getAdjNodesIdx():
 
-    while pQueue:
-        curEdge = heapq.heappop(pQueue)
-        # print(pQueue)
-        outIdx = curEdge.start
-        inIdx = curEdge.end
-        # print('outIdx=' + str(outIdx) + ' inIdx=' + str(inIdx))
-        outNode = nodeList[outIdx]
-        inNode = nodeList[inIdx]
+        curEdge = startNode.edges[edgeIdx]
+        res = transResourses(0, curEdge.length(), cfg)
+        curEdge.updateRes(res)  # 更新资源
+        curEdge.updateReling(cfg.RESW, cfg.KEYW, startNode)  # 更新可靠率
 
-        isVisit[inIdx] = 1
-        # add jump
-        curJump = inNode.updateJump(outNode)
+        inNode = nodeList[curEdge.end]
 
-        inNode.updateRes(outNode, curEdge)
+        inNode.updateRes(startNode, curEdge)
+        dist[curEdge.end] = inNode.reling
 
-        # upload path
-        inNode.addToPath(outNode)
+        inNode.addToPath(startNode)
 
-        if inNode == endNode:
-            return inNode
+        heapq.heappush(pQueue, curEdge)
 
-        if maxJump < curJump:
-            continue
 
-        for edgeIdx in inNode.getAdjNodesIdx():
-            # add to heap
-            newEdge = inNode.edges[edgeIdx]
-            if isVisit[newEdge.end]:
+
+    while True:
+        minIdx = -1
+        minVal = -1
+        for idx, val in enumerate(dist):
+            if isVisit[idx] == 0 and val != -1:
+                if minVal == -1 or minVal > val:
+                    minVal = val
+                    minIdx = idx
+        if minVal == -1:
+            break
+            
+        curNode = nodeList[minIdx]
+        isVisit[minIdx] = 1
+
+        
+
+        for edgeIdx in curNode.getAdjEdge():
+            curEdge = curNode.edges[edgeIdx]
+            inNodeIdx = curEdge.end
+            inNode = nodeList[inNodeIdx]
+            
+            if isVisit[inNodeIdx] == 1:
                 continue
-            res = transResourses(curJump, newEdge.length(), cfg)
-            newEdge.updateRes(res)
-            newEdge.updateReling(cfg.RESW, cfg.KEYW, outNode)  # calculate weight by jump times
+    
+            curJump = curNode.jumps + 1
 
-            heapq.heappush(pQueue, newEdge)
+            if maxJump < curJump:
+                continue
 
-    return None
+            res = transResourses(curJump, curEdge.length(), cfg)
+            curEdge.updateRes(res)  # 更新资源
+            curEdge.updateReling(cfg.RESW, cfg.KEYW, curNode)  # 更新可靠率
+            if minIdx == 4 and inNodeIdx == 11:
+                print(dist[11])
+            if dist[inNodeIdx] == -1 or dist[inNodeIdx] > curEdge.res + curNode.res:
+                inNode.updateRes(curNode, curEdge)
+                dist[inNodeIdx] = inNode.res
+                inNode.updateJump(curNode)
+                inNode.addToPath(curNode)
+    return endNode

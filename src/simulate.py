@@ -26,7 +26,9 @@ def simulateManual(path):
     k = int(input('本业务传输消耗密钥量:'))
     g = int(input('本网络每跳所额外消耗密钥量:'))
     q = int(input('本网络单位长度消耗密钥量:'))
+    
     cfg = Config(g, q)
+    # cfg = Config()
     print('----------测试算法----------')
     while 1:
         print('...开始测试，输入-1退出...')
@@ -51,7 +53,7 @@ def test(info):
 def main():
     FILEPATH = r'D:\Programme\Python\fz\矩阵数据.xlsx'
 
-    # simulateManual(FILEPATH)
+    simulateManual(FILEPATH)
     a = b = c = 1
     info = (a, b, c)
     test(info)
